@@ -2,7 +2,7 @@ import sys
 
 
 def main():
-    print("OK")
+    print("OK2")
     return 0
 
 
