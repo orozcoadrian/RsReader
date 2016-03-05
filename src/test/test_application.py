@@ -16,8 +16,9 @@ class AcceptanceTests(TestCase):
         sys.argv = self.old_value_of_argv
 
     def test_should_get_one_URL_and_print_output(self):
-        printed_items = """Wed, 05 Dec 2007 05:00:00 -0000: xdkc.com: Python
-    Mon, 03 Dec 2007 05:00:00 -000: xkcd.com: Far Away"""
+        printed_items = \
+            """Wed, 05 Dec 2007 05:00:00 -0000: xdkc.com: Python
+        Mon, 03 Dec 2007 05:00:00 -000: xkcd.com: Far Away"""
 
         sys.argv = ["unused_prog_name", "xkcd.rss.xml"]
         main()
