@@ -1,10 +1,14 @@
 from unittest import TestCase
 import sys
 from io import StringIO
+import os
 
 from rsreader.application import main
 from test.shared_data import *
 
+module = sys.modules[__name__]
+this_dir = os.path.dirname(os.path.abspath(module.__file__))
+xkcd_rss_xml = os.path.join(this_dir, 'data', 'xkcd.rss.xml')
 
 class AcceptanceTests(TestCase):
 
@@ -19,7 +23,7 @@ class AcceptanceTests(TestCase):
         sys.argv = self.old_value_of_argv
 
     def test_should_get_one_URL_and_print_output(self):
-        sys.argv = ["unused_prog_name", "xkcd.rss.xml"]
+        sys.argv = ["unused_prog_name", xkcd_rss_xml]
         main()
         self.assertStdoutEquals(printed_items + "\n")
 
@@ -29,7 +33,7 @@ class AcceptanceTests(TestCase):
         self.assertStdoutEquals("")
 
     def test_many_urls_should_print_first_results(self):
-        sys.argv = ["unused_prog_name", "xkcd.rss.xml", "excess"]
+        sys.argv = ["unused_prog_name", xkcd_rss_xml, "excess"]
         main()
         self.assertStdoutEquals(printed_items + "\n")
 

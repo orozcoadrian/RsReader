@@ -13,10 +13,11 @@ class RSReader(object):
 
     def main(self, argv):
         if argv[1:]:
-            print(self.xkcd_items)
+            url = argv[1]
+            print(self.feed_listing(self.feed_from_url(url)))
 
     def listing_from_item(self, feed, item):
-        subst = (item['date'], feed['feed']['title'], item['title'])
+        subst = (item['published'], feed['feed']['title'], item['title'])
         return "%s: %s: %s" % subst
 
     def feed_listing(self, feed):

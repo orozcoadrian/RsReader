@@ -4,9 +4,9 @@ import feedparser
 from rsreader.application import RSReader
 from test.shared_data import *
 
-items = [{'date': "Wed, 05 Dec 2007 05:00:00 -0000",
+items = [{'published': "Wed, 05 Dec 2007 05:00:00 -0000",
           'title': "Python"},
-         {'date': "Mon, 03 Dec 2007 05:00:00 -0000",
+         {'published': "Mon, 03 Dec 2007 05:00:00 -0000",
           'title': "Far Away"}]
 feed = {'feed': {'title': "xkcd.com"}, 'entries': items}
 
