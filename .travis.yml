@@ -1,6 +1,6 @@
 language: python
 python:
-  - "2.7"
+  #- "2.7" got an error with StringIO
   - "3.5"
   - "3.5-dev" # 3.5 development branch
   - "nightly" # currently points to 3.6-dev
