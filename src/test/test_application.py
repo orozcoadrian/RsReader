@@ -1,40 +1,12 @@
-from unittest import TestCase
-import sys
-from io import StringIO
+from nose.tools import *
 
-from rsreader.application import main
+from rsreader.application import RSReader
 
 
-class AcceptanceTests(TestCase):
-    printed_items = \
-        """Wed, 05 Dec 2007 05:00:00 -0000: xdkc.com: Python\nMon, 03 Dec 2007 05:00:00 -000: xkcd.com: Far Away"""
-    def setUp(self):
-        self.old_value_of_stdout = sys.stdout
-        sys.stdout = StringIO()
-        self.old_value_of_argv = sys.argv
-
-    def tearDown(self):
-        sys.stdout = self.old_value_of_stdout
-        sys.argv = self.old_value_of_argv
-
-    def test_should_get_one_URL_and_print_output(self):
-
-        sys.argv = ["unused_prog_name", "xkcd.rss.xml"]
-        main()
-        self.assertStdoutEquals(self.printed_items + "\n")
-
-    def test_no_urls_should_print_nothing(self):
-        sys.argv = ["unused_prog_name"]
-        main()
-        self.assertStdoutEquals("")
-
-    def test_many_urls_should_print_first_results(self):
-
-
-        sys.argv = ["unused_prog_name", "xkcd.rss.xml", "excess"]
-        main()
-        self.assertStdoutEquals(self.printed_items + "\n")
-
-    def assertStdoutEquals(self, expected_output):
-        self.assertEquals(expected_output,
-                          sys.stdout.getvalue())
+def test_listing_from_item():
+    expected_line = """Wed, 05 Dec 2007 05:00:00 -0000: xkcd.com: Python"""
+    item = {'date': "Wed, 05 Dec 2007 05:00:00 -0000",
+            'title': "Python"}
+    feed = {'feed': {'title': "xkcd.com"}}
+    computed_line = RSReader().listing_from_item(feed, item)
+    assert_equals(expected_line, computed_line)
