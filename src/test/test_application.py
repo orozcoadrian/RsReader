@@ -1,4 +1,5 @@
 from nose.tools import *
+import feedparser
 
 from rsreader.application import RSReader
 from test.shared_data import *
@@ -18,3 +19,17 @@ def test_listing_from_item():
 def test_feed_listing():
     computed_line = RSReader().feed_listing(feed)
     assert_equals(printed_items, computed_line)
+
+
+def test_feed_from_url():
+    url = "http://www.xkcd.com/rss.xml"
+
+    def parse_stub(url):
+        return feed
+
+    real_parse = feedparser.parse
+    feedparser.parse = parse_stub
+    try:
+        assert_equals(feed, RSReader().feed_from_url(url))
+    finally:
+        feedparser.parse = real_parse
