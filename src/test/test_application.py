@@ -18,7 +18,7 @@ class AcceptanceTests(TestCase):
     def test_should_get_one_URL_and_print_output(self):
         printed_items = \
             """Wed, 05 Dec 2007 05:00:00 -0000: xdkc.com: Python
-        Mon, 03 Dec 2007 05:00:00 -000: xkcd.com: Far Away"""
+            Mon, 03 Dec 2007 05:00:00 -000: xkcd.com: Far Away"""
 
         sys.argv = ["unused_prog_name", "xkcd.rss.xml"]
         main()
@@ -29,3 +29,13 @@ class AcceptanceTests(TestCase):
         sys.argv = ["unused_prog_name"]
         main()
         self.assertEquals("", sys.stdout.getvalue())
+
+    def test_many_urls_should_print_first_results(self):
+        printed_items = \
+            """Wed, 05 Dec 2007 05:00:00 -0000: xdkc.com: Python
+            Mon, 03 Dec 2007 05:00:00 -000: xkcd.com: Far Away"""
+
+        sys.argv = ["unused_prog_name", "xkcd.rss.xml", "excess"]
+        main()
+        self.assertEquals(printed_items + "\n",
+                          sys.stdout.getvalue())
