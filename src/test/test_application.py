@@ -9,6 +9,7 @@ items = [{'date': "Wed, 05 Dec 2007 05:00:00 -0000",
           'title': "Far Away"}]
 feed = {'feed': {'title': "xkcd.com"}, 'entries': items}
 
+
 def test_listing_from_item():
     computed_line = RSReader().listing_from_item(feed, items[0])
     assert_equals(expected_items[0], computed_line)
