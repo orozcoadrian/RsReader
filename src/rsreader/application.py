@@ -1,5 +1,6 @@
 import sys
 
+
 def main():
     RSReader().main(sys.argv)
 
@@ -15,6 +16,10 @@ class RSReader(object):
     def listing_from_item(self, feed, item):
         subst = (item['date'], feed['feed']['title'], item['title'])
         return "%s: %s: %s" % subst
+
+    def feed_listing(self, feed):
+        item_listings = [self.listing_from_item(feed, x) for x in feed['entries']]
+        return "\n".join(item_listings)
 
 
 if __name__ == '__main__':
