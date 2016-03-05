@@ -7,7 +7,7 @@ def main():
 
 class RSReader(object):
     xkcd_items = \
-        """Wed, 05 Dec 2007 05:00:00 -0000: xkcd.com: Python\nMon, 03 Dec 2007 05:00:00 -000: xkcd.com: Far Away"""
+        """Wed, 05 Dec 2007 05:00:00 -0000: xkcd.com: Python\nMon, 03 Dec 2007 05:00:00 -0000: xkcd.com: Far Away"""
 
     def main(self, argv):
         if argv[1:]:

@@ -1,7 +1,7 @@
 from nose.tools import *
 
 from rsreader.application import RSReader
-
+from test.shared_data import *
 
 def test_listing_from_item():
     expected_line = """Wed, 05 Dec 2007 05:00:00 -0000: xkcd.com: Python"""
@@ -13,8 +13,6 @@ def test_listing_from_item():
 
 
 def test_feed_listing():
-    printed_items = \
-        """Wed, 05 Dec 2007 05:00:00 -0000: xkcd.com: Python\nMon, 03 Dec 2007 05:00:00 -0000: xkcd.com: Far Away"""
     items = [{'date': "Wed, 05 Dec 2007 05:00:00 -0000",
               'title': "Python"},
              {'date': "Mon, 03 Dec 2007 05:00:00 -0000",

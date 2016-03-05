@@ -3,11 +3,11 @@ import sys
 from io import StringIO
 
 from rsreader.application import main
+from test.shared_data import *
 
 
 class AcceptanceTests(TestCase):
-    printed_items = \
-        """Wed, 05 Dec 2007 05:00:00 -0000: xkcd.com: Python\nMon, 03 Dec 2007 05:00:00 -000: xkcd.com: Far Away"""
+
 
     def setUp(self):
         self.old_value_of_stdout = sys.stdout
@@ -21,7 +21,7 @@ class AcceptanceTests(TestCase):
     def test_should_get_one_URL_and_print_output(self):
         sys.argv = ["unused_prog_name", "xkcd.rss.xml"]
         main()
-        self.assertStdoutEquals(self.printed_items + "\n")
+        self.assertStdoutEquals(printed_items + "\n")
 
     def test_no_urls_should_print_nothing(self):
         sys.argv = ["unused_prog_name"]
@@ -31,7 +31,7 @@ class AcceptanceTests(TestCase):
     def test_many_urls_should_print_first_results(self):
         sys.argv = ["unused_prog_name", "xkcd.rss.xml", "excess"]
         main()
-        self.assertStdoutEquals(self.printed_items + "\n")
+        self.assertStdoutEquals(printed_items + "\n")
 
     def assertStdoutEquals(self, expected_output):
         self.assertEquals(expected_output,
